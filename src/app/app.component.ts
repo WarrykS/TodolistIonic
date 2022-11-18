@@ -1,18 +1,56 @@
 import { Component } from '@angular/core';
+import { Platform, NavController } from '@ionic/angular';
+import { SplashScreen } from '@awesome-cordova-plugins/splash-screen/ngx';
+import { StatusBar } from '@awesome-cordova-plugins/status-bar/ngx';
+import { AuthService } from './services/auth.service';
+import { AlertService } from './services/alert.service';
 @Component({
   selector: 'app-root',
-  templateUrl: 'app.component.html',
-  styleUrls: ['app.component.scss'],
+  templateUrl: 'app.component.html'
 })
 export class AppComponent {
   public appPages = [
-    { title: 'Inbox', url: '/folder/Inbox', icon: 'mail' },
-    { title: 'Outbox', url: '/folder/Outbox', icon: 'paper-plane' },
-    { title: 'Favorites', url: '/folder/Favorites', icon: 'heart' },
-    { title: 'Archived', url: '/folder/Archived', icon: 'archive' },
-    { title: 'Trash', url: '/folder/Trash', icon: 'trash' },
-    { title: 'Spam', url: '/folder/Spam', icon: 'warning' },
+    {
+      title: 'Dashboard',
+      url: '/list',
+      icon: 'home'
+    },
+    {
+      title: 'List',
+      url: '/dashboard',
+      icon: 'list'
+    },
   ];
-  public labels = ['Family', 'Friends', 'Notes', 'Work', 'Travel', 'Reminders'];
-  constructor() {}
+  constructor(
+    private platform: Platform,
+    private splashScreen: SplashScreen,
+    private statusBar: StatusBar,
+    private authService: AuthService,
+    private navCtrl: NavController,
+    private alertService: AlertService
+  ) {
+    this.initializeApp();
+  }
+  initializeApp() {
+    this.platform.ready().then(() => {
+      this.statusBar.styleDefault();
+      // Commenting splashScreen Hide, so it won't hide splashScreen before auth check
+      //this.splashScreen.hide();
+      this.authService.getToken();
+    });
+  }
+  // When Logout Button is pressed
+  logout() {
+    this.authService.logout().subscribe(
+      data => {
+        this.alertService.presentToast(data['message']);
+      },
+      error => {
+        console.log(error);
+      },
+      () => {
+        this.navCtrl.navigateRoot('/landing');
+      }
+    );
+  }
 }

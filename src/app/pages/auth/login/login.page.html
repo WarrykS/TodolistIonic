@@ -1,0 +1,23 @@
+<ion-header>
+  <ion-toolbar>
+    <ion-button color="light" (click)="dismissLogin()"> <ion-icon name="close-circle"></ion-icon>Retour</ion-button> <!--Permet de fermer le formulaire de connexion-->
+    <ion-title>Se connecter</ion-title>
+  </ion-toolbar>
+</ion-header>
+<!---------------------Formulaire de connexion------------------------>
+<ion-content padding>
+  <form #form="ngForm" (ngSubmit)="login(form)" method="post" action="login">
+    <ion-item>
+      <ion-label position="floating">Email</ion-label>
+      <ion-input ngModel type="email" name="email"></ion-input>
+    </ion-item>
+
+    <ion-item>
+      <ion-label position="floating">Mot de passe</ion-label>
+      <ion-input ngModel type="password" name="password"></ion-input>
+    </ion-item>
+    <ion-button type="submit" expand="full" fill="clear" color="warning">Se connecter</ion-button>
+    <p text-center class="ion-text-center">ou</p>
+    <ion-button expand="full"(click)="registerModal()" fill="clear" color="warning">Créer un compte</ion-button>
+  </form>
+</ion-content>

@@ -1,0 +1,33 @@
+<ion-header>
+  <ion-toolbar>
+    <ion-back-button slot="start" class="iconback" text="" icon="arrow-undo" color="warning" defaultHref="landing"></ion-back-button> <!--Bouton permettant de revenir en arrière -->
+    <ion-title style="color: #FFD948;">Accueil</ion-title>
+  </ion-toolbar>
+</ion-header>
+
+<ion-content>
+  <div class="liste" >
+   <ion-button fill="clear" color="warning" (click)="nextpage()"><ion-back-button></ion-back-button><h3>Ajouter une liste</h3></ion-button><!-- Bouton permettant de creer une nouvelle liste de course -->
+  </div>
+</ion-content>
+
+<style>
+
+.liste {
+  margin: auto;
+  padding-top: 20px;
+  padding-left: 25%;
+  
+}
+
+.iconback {
+  padding-right: 360px;
+}
+</style>
+
+
+
+
+
+
+

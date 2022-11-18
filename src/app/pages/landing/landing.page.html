@@ -1,0 +1,30 @@
+<ion-content contentId="landingContent">
+  <ion-card class="welcome-card">
+    <ion-card-header class="ion-text-center">
+      <ion-card-title><h4>Bienvenue sur</h4> <h1 class="faittonshop" style="color: #FFD534;">FaitTonShop</h1></ion-card-title>
+    </ion-card-header>
+  </ion-card>
+</ion-content>
+
+<ion-footer>
+  <ion-toolbar>
+      <ion-row>
+        <ion-col>
+          <ion-button fill="clear" color="primary" expand="full" color="warning" (click)="login()">Se connecter</ion-button> <!--Bouton permettant de se connecter-->
+        </ion-col>
+        <ion-col>
+          <ion-button color="primary" fill="clear" expand="full" color="warning" (click)="register()">Créer un compte</ion-button> <!--Boutton permettant de partir sur la page d'inscription-->
+        </ion-col>
+      </ion-row>
+  </ion-toolbar>
+</ion-footer>
+
+<ion-router-outlet id="landingContent"></ion-router-outlet>
+
+<style>
+
+.faittonshop {
+  font-size: 45px;
+}
+
+</style>

@@ -1,0 +1,71 @@
+<link href="dashboard.page.css">
+
+<ion-header>
+  <ion-toolbar>
+    <ion-buttons slot="start">
+      <ion-back-button text="" icon="arrow-undo" color="warning" defaultHref="list"></ion-back-button> <!--permet de revenir à la page précédente-->
+    </ion-buttons>
+    <div class="icon2">
+    <ion-icon color="warning" name="basket-outline" style="float: center;"></ion-icon> <!--permet de commencer une liste-->
+    </div>
+    <ion-buttons slot="end">
+      <ion-button *ngIf="isOpen === false" color="warning" (click)="isOpen = true"> <ion-icon name="add-circle"></ion-icon></ion-button> <!-- Ouvrir la liste -->
+      <ion-button *ngIf="isOpen === true" color="warning" (click)="isOpen = false"> <ion-icon name="close-circle"></ion-icon></ion-button> <!-- Fermer la liste -->
+    </ion-buttons>
+  </ion-toolbar>
+</ion-header>
+
+
+
+<ion-content [fullscreen]="true">
+  <div class="empty" *ngIf="tasks.length === 0" class="ion-text-center"> <!-- Si la liste est égale à 0 -->
+    <div class="listevide">
+    <bold style="color: #FFD534;">Liste vide</bold> <!-- alors afficher -->
+    </div>
+  </div>
+  <ion-list class="ion-text-center" *ngIf="tasks.length > 0">     <!-- si la liste est supérieure a 0 -->
+    <ion-list-header class="ion-text-center">
+      <h4 style="color: #FFD534;"> Mes produits</h4> 
+    </ion-list-header>
+    <ion-card class="tasks" *ngFor="let task of tasks; let i = index">
+      <ion-item>
+        <ion-checkbox icon="bag-check" color="warning" [checked]="task.isChecked " (ionChange)="onCheck($event, i)"></ion-checkbox> <!--vérifie si le produit est checké-->
+        <div class="icon">
+        <ion-label style="float: center;" style="color: #FFD534;"> <ion-icon name="bag-check"></ion-icon>Acheter</ion-label>
+        </div>
+      </ion-item>
+      <h4 *ngIf="!task.isChecked" class="task-title" style="color: #FFD534;">{{ task.content}}</h4> <!-- si le produit n'est pas coché -->
+      <h4 *ngIf="task.isChecked" class="task-title" style="color: #3a3a3a; text-decoration: line-through;">{{ task.content }}</h4> <!-- si le produit est coché -->
+      <ion-button fill="clear"  color="warning" style="float: center;" (click)="deleteTask(i)"> <!-- bouton permetant de supprimer un produit -->
+        <ion-icon name="trash-bin-outline"></ion-icon> <!-- icône du bouton de suppression -->
+      </ion-button>
+    </ion-card>
+  </ion-list>
+</ion-content>
+
+<ion-footer *ngIf="isOpen">
+  <ion-item>
+    <ion-input class="ion-text-center" [(ngModel)]="newTask"placeholder="Ajouter un produit"> <!--champs d'écriture du produit-->
+
+    </ion-input>
+    <ion-button shape="round" (click)="addNewTask()" color="warning" [disabled]="newTask === ''"> <!--Bouton permettant d'ajouter le produit-->
+     <bold> <ion-icon class="ion-text-center" name="bag-add"></ion-icon>Ajouter </bold>
+    </ion-button>
+  </ion-item>
+</ion-footer>
+
+<style>
+  .listevide {
+    padding-top: 340px;
+    font-size: 65px;
+  }
+
+  .icon {
+    font-size: 20px;
+  }
+
+  .icon2 {
+    padding-left: 150px;
+    font-size: 30px;
+  }
+</style>

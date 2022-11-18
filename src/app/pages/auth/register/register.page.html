@@ -1,0 +1,36 @@
+<ion-header>
+  <ion-toolbar>
+    <ion-button color="light" (click)="dismissRegister()">Close</ion-button><!--Fermer le formulaire-->
+    <ion-title>Créer un compte</ion-title>
+  </ion-toolbar>
+</ion-header>
+
+<ion-content padding>
+<!-------------------------Formulaire d'inscription------------------------------>
+  <form #form="ngForm" (ngSubmit)="register(form)" method="post" action='register'>
+    <ion-item>
+        <ion-label position="floating">Prénom</ion-label>
+        <ion-input ngModel name="fName"></ion-input>
+    </ion-item>
+
+    <ion-item>
+      <ion-label position="floating">Nom</ion-label>
+      <ion-input ngModel name="lName"></ion-input>
+    </ion-item>
+
+    <ion-item>
+      <ion-label position="floating">Email</ion-label>
+      <ion-input type="email" ngModel name="email"></ion-input>
+    </ion-item>
+
+    <ion-item>
+      <ion-label position="floating">Mot de passe</ion-label>
+      <ion-input type="password" ngModel name="password"></ion-input>
+    </ion-item>
+<!----------------------------------Valider l'inscription-------------------------------->
+    <ion-button type="submit" expand="full" fill="clear" color="warning">Créer un compte</ion-button> 
+  </form>
+<!-----------------------Ouvrir le formulaire de connexion------------------------------->
+  <p text-center class="ion-text-center">ou</p>
+  <ion-button expand="full" fill="clear" color="warning" (click)="loginModal()">Se connecter</ion-button> 
+</ion-content>
